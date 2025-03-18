@@ -12,6 +12,7 @@ use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\MenuItem;
+use Filament\Navigation\NavigationGroup;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -39,7 +40,7 @@ final class AdminPanelProvider extends PanelProvider
         if (! app()->runningUnitTests()) {
             $userMenuItems = [
                 'app' => MenuItem::make()
-                    ->label(__('common.go_to_app'))
+                    ->label(fn(): string => __('common.go_to_app'))
                     ->icon('heroicon-o-arrow-left-circle')
                     ->url(
                         function (): string {
@@ -68,7 +69,18 @@ final class AdminPanelProvider extends PanelProvider
             ->unsavedChangesAlerts()
             ->spa()
             ->login()
+            ->passwordReset()
+            ->emailVerification()
             ->userMenuItems($userMenuItems)
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label(fn (): string => __('admin/employee-company-resource.navigation_group')),
+                NavigationGroup::make()
+                    ->label(fn (): string => __('admin/country-resource.navigation_group')),
+                NavigationGroup::make()
+                    ->label(fn (): string => __('admin/user-resource.navigation_group'))
+                    ->collapsed(),
+            ])
             ->colors([
                 'primary' => Color::Indigo,
             ])
@@ -111,10 +123,10 @@ final class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->renderHook(
-                PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
-                fn (): string => Blade::render('<x-filament::badge color="primary">ADMIN</x-filament::badge>'),
-            );
+            ]);
+//            ->renderHook(
+//                PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
+//                fn (): string => Blade::render('<x-filament::badge color="primary">ADMIN</x-filament::badge>'),
+//            );
     }
 }

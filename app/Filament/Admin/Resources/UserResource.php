@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\UserResource\Pages;
+use App\Filament\Concerns\HasCreatedAtFilter;
 use App\Filament\Exports\UserExporter;
 use App\Helpers\ProjectHelper;
 use App\Models\Role;
@@ -27,6 +28,8 @@ use Override;
 
 final class UserResource extends Resource
 {
+    use HasCreatedAtFilter;
+
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
@@ -161,50 +164,7 @@ final class UserResource extends Resource
                         blank: fn (Builder $query): Builder => $query,
                     ),
                 Tables\Filters\TrashedFilter::make(),
-                Tables\Filters\Filter::make('created_at')
-                    ->form([
-                        Forms\Components\DatePicker::make('created_from')
-                            ->label(__('common.created_from')),
-                        Forms\Components\DatePicker::make('created_until')
-                            ->label(__('common.created_until'))
-                            ->default(now()),
-                    ])
-                    // @codeCoverageIgnoreStart
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when(
-                                $data['created_from'],
-                                function (Builder $query, mixed $date): Builder {
-                                    /** @var ?string $date */
-                                    return $query->whereDate('created_at', '>=', $date);
-                                },
-                            )
-                            ->when(
-                                $data['created_until'],
-                                function (Builder $query, mixed $date): Builder {
-                                    /** @var ?string $date */
-                                    return $query->whereDate('created_at', '<=', $date);
-                                },
-                            );
-                    })
-                    ->indicateUsing(function (array $data): array {
-                        $indicators = [];
-
-                        if ($data['created_from'] ?? null) {
-                            // @phpstan-ignore-next-line
-                            $indicators[] = Tables\Filters\Indicator::make(__('common.created_from').' '.Carbon::parse($data['created_from'])->translatedFormat(__('common.formats.date_string')))
-                                ->removeField('created_from');
-                        }
-
-                        if ($data['created_until'] ?? null) {
-                            // @phpstan-ignore-next-line
-                            $indicators[] = Tables\Filters\Indicator::make(__('common.created_until').' '.Carbon::parse($data['created_until'])->translatedFormat(__('common.formats.date_string')))
-                                ->removeField('created_until');
-                        }
-
-                        return $indicators;
-                    }),
-                // @codeCoverageIgnoreEnd
+                self::createdAtFilter(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()

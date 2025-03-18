@@ -1,0 +1,157 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'navigation_label' => 'Employees',
+    'breadcrumb' => 'Employees',
+    'list' => [
+        'title' => 'Employees',
+    ],
+    'create' => [
+        'title' => 'Create Employee',
+    ],
+    'edit' => [
+        'title' => 'Edit Employee',
+        'wizard' => [
+            'step1' => 'RECRUITMENT QUESTIONNAIRE - Part 1 (for recruiters)',
+            'step2' => 'QUESTIONNAIRE - Part 2 (job information)',
+            'step3' => 'Other',
+        ],
+    ],
+    'view' => [
+        'title' => 'Employee Details',
+    ],
+    'attributes' => [
+        'id_number' => 'ID Number',
+        'vat_number' => 'VAT Number',
+        'first_name' => 'First Name',
+        'last_name' => 'Last Name',
+        'family_name' => 'Birth Surname',
+        'status' => 'Status',
+        'gender' => 'Gender',
+        'passport_number' => 'Passport Number',
+        'issuing_authority_name' => 'Issuing Authority',
+        'visa_number' => 'Visa Number',
+        'residence_permit_type' => 'Residence Permit Type',
+        'health_insurance' => 'Health Insurance',
+        'birth_date' => 'Date of Birth',
+        'birth_number' => 'Birth Number',
+        'street' => 'Permanent Residence - Street',
+        'house_number' => 'House Number',
+        'city' => 'City',
+        'postal_code' => 'Postal Code',
+        'country' => 'Country',
+        'country_id' => 'Country',
+        'nationality' => 'Nationality',
+        'nationality_id' => 'Nationality',
+        'hostel_cr_street' => 'Accommodation in Czech Republic - Street',
+        'hostel_cr_house_number' => 'Accommodation in Czech Republic - House Number',
+        'hostel_cr_city' => 'Accommodation in Czech Republic - City',
+        'hostel_cr_postal_code' => 'Accommodation in Czech Republic - Postal Code',
+        'telephone_abroad' => 'Foreign Phone',
+        'telephone_cr' => 'Phone in Czech Republic',
+        'shoe_size' => 'Shoe Size',
+        't_shirt_size' => 'T-shirt Size',
+        'achieved_education' => 'Achieved Education',
+        'field_of_education' => 'Field of Education',
+        'previous_experience' => 'Previous Experience',
+        'is_first_job_cr' => 'Is First Job in Czech Republic',
+        'account_number_cr' => 'Account Number in Czech Republic',
+        'languages' => 'Languages',
+        'work_permit_type' => 'Work Permit Type',
+        'work_permit_validity' => 'Work Permit Validity',
+        'registration_number_cssz' => 'CSSZ Registration Number',
+        'date_of_employment' => 'Employment Start Date',
+        'date_of_termination_of_employment' => 'Employment End Date',
+        'actual_date_of_last_shift' => 'Actual Date of Last Shift',
+        'start_date_hpp' => 'HPP - Start Date',
+        'end_date_hpp' => 'HPP - End Date',
+        'start_date_dpc' => 'DPČ - Start Date',
+        'end_date_dpc' => 'DPČ - End Date',
+        'start_date_dpp' => 'DPP - Start Date',
+        'end_date_dpp' => 'DPP - End Date',
+        'employment_relationship_type' => 'Employment Relationship Type',
+        'temporary_assignment_user_company_name' => 'Company Name during Temporary Assignment',
+        'employee_company_id' => 'Company Name',
+        'work_address_street' => 'Workplace Street',
+        'work_address_house_number' => 'Workplace House Number',
+        'work_address_city' => 'Workplace City',
+        'work_address_postal_code' => 'Workplace Postal Code',
+        'classification_cz_isco' => 'Profession according to CZ ISCO',
+        'profession_code_cz_isco' => 'Occupation Code CZ ISCO',
+        'classification_cz_nace' => 'Classification CZ NACE',
+        'note' => 'Note',
+        'avatar' => 'Avatar',
+    ],
+    'filters' => [
+        'date_of_employment_from' => 'Employment Date From',
+        'date_of_termination_of_employment_until' => 'Employment End Date Until',
+    ],
+    'actions' => [
+        'modals' => [
+            'download_documents' => [
+                'button' => 'Download Documents',
+                'heading' => 'Download Documents',
+                'description' => 'Do you really want to download the employee\'s documents?',
+                'select_documents' => 'Select Documents',
+                'no_documents_generated' => 'No documents have been generated.',
+            ],
+            'delete' => [
+                'bulk' => [
+                    'heading' => 'Delete Employee',
+                    'description' => 'Do you really want to delete the selected employees?',
+                ],
+                'single' => [
+                    'heading' => 'Delete Employee',
+                    'description' => 'Do you really want to delete this employee?',
+                ],
+            ],
+            'force_delete' => [
+                'bulk' => [
+                    'heading' => 'Permanently Delete Employee',
+                    'description' => 'Do you really want to permanently delete the selected employees?',
+                ],
+                'single' => [
+                    'heading' => 'Permanently Delete Employee',
+                    'description' => 'Do you really want to permanently delete this employee?',
+                ],
+            ],
+            'restore' => [
+                'bulk' => [
+                    'heading' => 'Restore Employee',
+                    'description' => 'Do you really want to restore the selected employees?',
+                ],
+                'single' => [
+                    'heading' => 'Restore Employee',
+                    'description' => 'Do you really want to restore this employee?',
+                ],
+            ],
+        ],
+    ],
+    'enums' => [
+        'residence_permit_type' => [
+            'do' => 'DO',
+            'sd' => 'SD',
+            'card' => 'Card',
+            'eu' => 'EU',
+        ],
+        'employee_status' => [
+            'candidate' => 'Candidate',
+            'employee' => 'Employee',
+            'terminated' => 'Terminated',
+        ],
+        'work_permit_type' => [
+            'employment_permit' => 'Employment Permit',
+            'employee_card' => 'Employee Card',
+            'intra_corporate_transferee_card' => 'Intra-Corporate Transferee Card',
+            'blue_card' => 'Blue Card',
+        ],
+        'employment_relation_type' => [
+            'employment_relationship' => 'Employment Relationship',
+            'agreement_for_performance_of_work' => 'Agreement for the Performance of Work (DPP)',
+            'agreement_on_employment' => 'Agreement on Employment (DPČ)',
+            'main_employment_relationship' => 'Main Employment Relationship (HPP)',
+        ],
+    ],
+];

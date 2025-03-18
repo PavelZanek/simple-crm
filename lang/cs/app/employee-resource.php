@@ -1,0 +1,156 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'navigation_label' => 'Zaměstnanci',
+    'breadcrumb' => 'Zaměstnanci',
+    'list' => [
+        'title' => 'Zaměstnanci',
+    ],
+    'create' => [
+        'title' => 'Vytvořit zaměstnance',
+    ],
+    'edit' => [
+        'title' => 'Upravit zaměstnance',
+        'wizard' => [
+            'step1' => 'PŘIJÍMACÍ DOTAZNÍK - 1. část (pro náboráře)',
+            'step2' => 'DOTAZNÍK - 2. část (pracovní informace)',
+            'step3' => 'Ostatní',
+        ],
+    ],
+    'view' => [
+        'title' => 'Detail zaměstnance',
+    ],
+    'attributes' => [
+        'id_number' => 'IČO',
+        'vat_number' => 'DIČ',
+        'first_name' => 'Jméno',
+        'last_name' => 'Příjmení',
+        'family_name' => 'Rodné příjmení',
+        'status' => 'Status',
+        'gender' => 'Pohlaví',
+        'passport_number' => 'Číslo pasu',
+        'issuing_authority_name' => 'Vydávající orgán',
+        'visa_number' => 'Číslo víza',
+        'residence_permit_type' => 'Typ povolení k pobytu',
+        'health_insurance' => 'Zdravotní pojišťovna',
+        'birth_date' => 'Datum narození',
+        'birth_number' => 'Číslo pojištěnce',
+        'street' => 'Trvalý pobyt - ulice',
+        'house_number' => 'Číslo domu',
+        'city' => 'Město',
+        'postal_code' => 'PSČ',
+        'country' => 'Místo narození',
+        'country_id' => 'Země',
+        'nationality' => 'Record Number pas',
+        'nationality_id' => 'Národnost',
+        'hostel_cr_street' => 'Ubytování v ČR - ulice',
+        'hostel_cr_house_number' => 'Číslo domu ubytování v ČR',
+        'hostel_cr_city' => 'Město ubytování v ČR',
+        'hostel_cr_postal_code' => 'PSČ ubytování v ČR',
+        'telephone_abroad' => 'Telefon v zahraničí',
+        'telephone_cr' => 'Telefon v ČR',
+        'shoe_size' => 'Velikost bot',
+        't_shirt_size' => 'Velikost trička',
+        'achieved_education' => 'Dosažené vzdělání',
+        'field_of_education' => 'Obor vzdělání',
+        'previous_experience' => 'Předchozí zkušenosti',
+        'is_first_job_cr' => 'Je první práce v ČR',
+        'account_number_cr' => 'Číslo účtu v ČR',
+        'languages' => 'Jazyky',
+        'work_permit_type' => 'Typ pracovního oprávnění',
+        'work_permit_validity' => 'Platnost pracovního povolení',
+        'registration_number_cssz' => 'Evidenční číslo ČSSZ',
+        'date_of_employment' => 'Datum nástupu do zaměstnání',
+        'date_of_termination_of_employment' => 'Datum ukončení zaměstnání',
+        'actual_date_of_last_shift' => 'Skutečné datum poslední směny',
+        'start_date_hpp' => 'HPP - Datum nástupu',
+        'end_date_hpp' => 'HPP - Datum ukončení',
+        'start_date_dpc' => 'DPČ - Datum nástupu',
+        'end_date_dpc' => 'DPČ - Datum ukončení',
+        'start_date_dpp' => 'DPP - Datum nástupu',
+        'end_date_dpp' => 'DPP - Datum ukončení',
+        'employment_relationship_type' => 'Pracovněprávní vztah',
+        'temporary_assignment_user_company_name' => 'Zmocněnec pro podpis',
+        'employee_company_id' => 'Název společnosti',
+        'work_address_street' => 'Ulice pracoviště',
+        'work_address_house_number' => 'Číslo domu pracoviště',
+        'work_address_city' => 'Město pracoviště',
+        'work_address_postal_code' => 'PSČ pracoviště',
+        'classification_cz_isco' => 'Profese dle CZ ISCO',
+        'profession_code_cz_isco' => 'Kód povolání CZ ISCO',
+        'classification_cz_nace' => 'Klasifikace CZ NACE',
+        'note' => 'Poznámka',
+        'avatar' => 'Avatar',
+    ],
+    'filters' => [
+        'date_of_employment_from' => 'Datum nástupu od',
+        'date_of_termination_of_employment_until' => 'Datum ukončení zaměstnání do',
+    ],
+    'actions' => [
+        'modals' => [
+            'download_documents' => [
+                'button' => 'Stáhnout dokumenty',
+                'heading' => 'Stáhnout dokumenty',
+                'description' => 'Opravdu chcete stáhnout dokumenty zaměstnance?',
+                'select_documents' => 'Vyberte dokumenty',
+                'no_documents_generated' => 'Žádné dokumenty nebyly vygenerovány.',
+            ],
+            'delete' => [
+                'bulk' => [
+                    'heading' => 'Smazat zaměstnance',
+                    'description' => 'Opravdu chcete smazat vybrané zaměstnance?',
+                ],
+                'single' => [
+                    'heading' => 'Smazat zaměstnance',
+                    'description' => 'Opravdu chcete smazat tohoto zaměstnance?',
+                ],
+            ],
+            'force_delete' => [
+                'bulk' => [
+                    'heading' => 'Trvale smazat zaměstnance',
+                    'description' => 'Opravdu chcete trvale smazat vybrané zaměstnance?',
+                ],
+                'single' => [
+                    'heading' => 'Trvale smazat zaměstnance',
+                    'description' => 'Opravdu chcete trvale smazat tohoto zaměstnance?',
+                ],
+            ],
+            'restore' => [
+                'bulk' => [
+                    'heading' => 'Obnovit zaměstnance',
+                    'description' => 'Opravdu chcete obnovit vybrané zaměstnance?',
+                ],
+                'single' => [
+                    'heading' => 'Obnovit zaměstnance',
+                    'description' => 'Opravdu chcete obnovit tohoto zaměstnance?',
+                ],
+            ],
+        ],
+    ],
+    'enums' => [
+        'residence_permit_type' => [
+            'do' => 'DO',
+            'sd' => 'SD',
+            'card' => 'Karta',
+            'eu' => 'EU',
+        ],
+        'employee_status' => [
+            'candidate' => 'Kandidát',
+            'employee' => 'Zaměstnanec',
+            'terminated' => 'Ukončený',
+        ],
+        'work_permit_type' => [
+            'employment_permit' => 'Povolení k zaměstnání',
+            'employee_card' => 'Zaměstnanecká karta',
+            'intra_corporate_transferee_card' => 'Karta vnitropodnikově převedeného zaměstnance',
+            'blue_card' => 'Modrá karta',
+        ],
+        'employment_relation_type' => [
+            'employment_relationship' => 'Hlavní pracovní poměr (HPP)',
+            'agreement_for_performance_of_work' => 'Dohoda o provedení práce (DPP)',
+            'agreement_on_employment' => 'Dohoda o pracovní činnosti (DPČ)',
+        ],
+    ],
+];

@@ -32,7 +32,7 @@ final class AuthPanelProvider extends PanelProvider
                 'primary' => Color::Emerald,
             ])
             ->login()
-            ->registration(CustomRegister::class)
+            //->registration(CustomRegister::class)
             ->passwordReset()
             ->emailVerification()
             ->middleware([

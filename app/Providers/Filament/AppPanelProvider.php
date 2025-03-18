@@ -46,13 +46,13 @@ final class AppPanelProvider extends PanelProvider
             ->spa()
             ->login()
             // ->registration()
-            // ->passwordReset()
-            // ->emailVerification()
+            ->passwordReset()
+            ->emailVerification()
             // ->profile()
             // @codeCoverageIgnoreStart
             ->userMenuItems([
                 'admin' => MenuItem::make()
-                    ->label(__('common.go_to_admin'))
+                    ->label(fn(): string => __('common.go_to_admin'))
                     ->icon('heroicon-o-shield-check')
                     ->visible(fn (): bool => (bool) Auth::user()?->canAccessPanel(Filament::getPanel('admin')))
                     ->url(fn (): string => Filament::getPanel('admin')->route('pages.dashboard')),
@@ -66,9 +66,9 @@ final class AppPanelProvider extends PanelProvider
                     ),
             ])
             // @codeCoverageIgnoreEnd
-            ->tenant(Workspace::class)
-            ->tenantRegistration(RegisterWorkspace::class)
-            ->tenantProfile(EditWorkspace::class)
+            // ->tenant(Workspace::class)
+            // ->tenantRegistration(RegisterWorkspace::class)
+            // ->tenantProfile(EditWorkspace::class)
             // ->tenantMiddleware([
             //     ApplyTenantScopes::class,
             // ], isPersistent: true)

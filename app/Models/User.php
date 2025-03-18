@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\CastTypeEnum;
+use App\Models\Employees\Employee;
 use Exception;
 use Filament\Facades\Filament;
 use Filament\Models\Contracts\FilamentUser;
@@ -14,11 +16,14 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Override;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -51,6 +56,42 @@ class User extends Authenticatable implements FilamentUser, HasDefaultTenant, Ha
         'remember_token',
     ];
 
+    protected static function boot(): void
+    {
+        parent::boot();
+        self::softDeleted(function (self $user): void {
+            // suffix email with timestamp to avoid future collisions
+            DB::table('users')->where('id', $user->getKey())->update([
+                'email' => $user->email.'-'.\time(),
+            ]);
+        });
+        self::restored(function (self $user): void {
+            // Update the email to its original state
+            $currentEmail = DB::table('users')->where('id', $user->getKey())->value('email');
+            $originalEmail = Str::beforeLast($currentEmail, '-');
+            DB::table('users')->where('id', $user->getKey())->update([
+                'email' => $originalEmail,
+            ]);
+        });
+    }
+
+    /**
+     * @return BelongsToMany<Workspace, User>
+     */
+    public function workspaces(): BelongsToMany
+    {
+        /** @var BelongsToMany<Workspace, User> */
+        return $this->belongsToMany(Workspace::class);
+    }
+
+    /**
+     * @return HasMany<Employee>
+     */
+    public function employees(): HasMany
+    {
+        return $this->hasMany(Employee::class);
+    }
+
     /**
      * @throws Exception
      */
@@ -67,15 +108,6 @@ class User extends Authenticatable implements FilamentUser, HasDefaultTenant, Ha
         }
 
         return $panel->getId() === 'admin' && $this->hasAnyRole(Role::SUPER_ADMIN, Role::ADMIN);
-    }
-
-    /**
-     * @return BelongsToMany<Workspace, User>
-     */
-    public function workspaces(): BelongsToMany
-    {
-        /** @var BelongsToMany<Workspace, User> */
-        return $this->belongsToMany(Workspace::class);
     }
 
     public function canAccessTenant(Model $tenant): bool
@@ -134,9 +166,9 @@ class User extends Authenticatable implements FilamentUser, HasDefaultTenant, Ha
     protected function casts(): array
     {
         return [
-            'deleted_at' => 'datetime',
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'deleted_at' => CastTypeEnum::DATETIME,
+            'email_verified_at' => CastTypeEnum::DATETIME,
+            'password' => CastTypeEnum::HASHED,
         ];
     }
 }

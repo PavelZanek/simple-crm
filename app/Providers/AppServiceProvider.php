@@ -16,6 +16,7 @@ use Filament\Http\Responses\Auth\Contracts\RegistrationResponse;
 use Filament\Support\Facades\FilamentView;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -58,6 +59,10 @@ final class AppServiceProvider extends ServiceProvider
             return $user->hasRole(Role::SUPER_ADMIN) ? true : null;
         });
 
+        Gate::guessPolicyNamesUsing(function (string $modelClass) {
+            return str_replace('Models', 'Policies', $modelClass) . 'Policy';
+        });
+
         // @codeCoverageIgnoreStart
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch): void {
             $switch->locales([
@@ -78,6 +83,15 @@ final class AppServiceProvider extends ServiceProvider
         $this->configureUrl();
         $this->configureDates();
         $this->configureVite();
+
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::SIDEBAR_NAV_START,
+            fn (): string => Blade::render('<livewire:action-shortcuts />'),
+        );
+
+        FilamentView::registerRenderHook(PanelsRenderHook::BODY_END, function (): string {
+            return '<div style="height: 75px;"></div>';
+        });
 
         FilamentView::registerRenderHook(
             PanelsRenderHook::SCRIPTS_AFTER,
